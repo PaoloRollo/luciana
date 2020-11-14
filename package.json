@@ -1,0 +1,25 @@
+{
+  "name": "luciana",
+  "version": "1.0.0",
+  "description": "Luciana is an Open Source dynamic NodeJS REST API based on the given configuration.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PaoloRollo/luciana.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PaoloRollo/luciana/issues"
+  },
+  "homepage": "https://github.com/PaoloRollo/luciana#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.14"
+  }
+}
