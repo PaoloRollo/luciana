@@ -7,7 +7,7 @@ import utils from './utils';
 export default async function startApp() {
     try {
         // Create express app
-        let app: Application = express();
+        const app: Application = express();
         app.disable('etag').disable('x-powered-by');
         // CORS Setup
         const corsOptions = {
@@ -22,11 +22,11 @@ export default async function startApp() {
         // Enable trust proxy
         app.enable('trust proxy');
         // Load the models using the parser
-        const models = await utils.ModelsParser.parse(process.env.MODELS_CONFIG || '/usr/local/luciana/config/models/');
+        const models = await utils.ModelsParser.parse(process.env.MODELS_CONFIG || '/Users/prollo/Projects/private/luciana/build/models/');
         // Setup the API
-        app = await utils.ApiParser.parse(app, models, process.env.API_CONFIG || '/usr/local/luciana/config/api.json');
+        // app = await utils.ApiParser.parse(app, models, process.env.API_CONFIG || '/usr/local/luciana/config/api.json');
         // Setup the middlewares
-        app = await utils.MiddlewaresParser.parse(app, process.env.MIDDLEWARES_CONFIG || '/usr/local/luciana/config/middlewares.json');
+        // app = await utils.MiddlewaresParser.parse(app, process.env.MIDDLEWARES_CONFIG || '/usr/local/luciana/config/middlewares.json');
         return app;
     } catch (error) {
         console.error(error);

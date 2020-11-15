@@ -1,5 +1,5 @@
 import { Application } from 'express';
-import fs from 'fs/promises';
+import fs from 'fs';
 
 export default class MiddlewaresParser {
 
