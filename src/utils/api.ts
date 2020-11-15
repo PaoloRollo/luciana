@@ -1,33 +1,32 @@
-const fs = require('fs').promises;
+import { Application } from 'express';
+import fs from 'fs/promises';
 
 /**
  * ApiParser is the class used to parse the given API configuration file
  * into the expressjs routes.
  */
-class ApiParser {
+export default class ApiParser {
     
     /**
      * This function returns the updated app with all the new routes.
      * 
-     * @param {Express.Application} app express application instance.  
+     * @param {Application} app express application instance.  
      * @param {Array<Object>} models array of objects representing the models. 
-     * @param {String} filepath path of the file containing the api configuration as json.
+     * @param {string} filepath path of the file containing the api configuration as json.
      */
-    async static parse(app, models, filepath) {
-        return new Promise(async (resolve, reject) => {
+    static async parse(app: Application, models: Array<Object>, filepath: string): Promise<Application> {
+        return new Promise<Application>(async (resolve, reject) => {
             try {
                 // retrieve the configuration file
                 const configFile = await fs.readFile(filepath);
                 // retrieve api base and services
-                const { base, services } = JSON.parse(configFile);
+                const { base, services } = JSON.parse(configFile.toString());
                 // iterate through the servies 
                 for (let i = 0; i < services.length; i++) {
                     // get name, method and path of the current service
-                    let { methods, model, path } = service[i];
+                    let { methods, model, path } = services[i];
                     // if no '/' is provided in the path, append it
                     if (path[0] !== '/') path = '/${path}';
-                    // get the first model that matches the name
-                    const [ model ] = models.filter((m) => m.name === model);
                 }
                 resolve(app);
             } catch (error) {
@@ -37,6 +36,4 @@ class ApiParser {
         })
     }
 
-}
-
-module.exports = ApiParser;
+};

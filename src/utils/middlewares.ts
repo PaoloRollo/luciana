@@ -1,8 +1,9 @@
-const fs = require('fs').promises;
+import { Application } from 'express';
+import fs from 'fs/promises';
 
-class MiddlewaresParser {
+export default class MiddlewaresParser {
 
-    static parse = async (app, filepath) => {
+    static async parse (app: Application, filepath: string): Promise<Application> {
         return new Promise((resolve, reject) => {
             try {
                 resolve(app);
@@ -14,5 +15,3 @@ class MiddlewaresParser {
     }
 
 }
-
-module.exports = MiddlewaresParser;
