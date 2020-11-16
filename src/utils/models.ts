@@ -3,13 +3,29 @@ import mongoose from 'mongoose';
 import fs from 'fs';
 
 /**
- * ModelsParser 
+ * Returns the variable type for the input variable.
+ * @param {any} variable variable that must be analyzed.
+ * @return {any} variable type (eg. String).
+ */
+async function getVariableType(variable: any) {
+    if (!Number.isNaN(variable)) {
+        return Number;
+    } else if (variable instanceof Date) {
+        return Date;
+    } else {
+        return String;
+    }
+}
+
+/**
+ * ModelsParser
  */
 export default class ModelsParser {
 
     /**
      * Parses all the model files inside the dirpath directory.
-     * @param dirpath path of the directory where all the model files are built.
+     * @param {string} dirpath path of the directory where all the model files are built.
+     * @return {mongoose.Model<mongoose.Document>[]} array of mongoose models.
      */
     static async parse(dirpath: string): Promise<mongoose.Model<mongoose.Document>[]> {
         return new Promise(async (resolve, reject) => {
@@ -29,10 +45,11 @@ export default class ModelsParser {
                                         return new Promise(async (keysResolve, keysReject) => {
                                             try {
                                                 builtSchema[key] = {
-                                                    type: typeof instance[key],
+                                                    type: await getVariableType(instance[key]),
                                                 };
                                                 keysResolve(true);
                                             } catch (error) {
+                                                console.log(error);
                                                 keysReject(error);
                                             }
                                         })
@@ -43,6 +60,7 @@ export default class ModelsParser {
                                 models.push(mongooseModel);
                                 modelResolve(true);
                             } catch (error) {
+                                console.log(error);
                                 modelReject(error);
                             }
                         })
