@@ -4,8 +4,13 @@
  * ©2020 MIT License, for you.
  */
 import './db';
+import * as dotenv from 'dotenv';
 import startApp from './app';
 
+// Retrieve the config from the .env file
+dotenv.config({ path: `${__dirname}/../.env`});
+
+// Start the application
 startApp()
     .then((app) => {
         app.listen(process.env.PORT || 3000, () => {

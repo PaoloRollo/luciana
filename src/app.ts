@@ -22,7 +22,7 @@ export default async function startApp() {
         // Enable trust proxy
         app.enable('trust proxy');
         // Load the models using the parser
-        const models = await utils.ModelsParser.parse(process.env.MODELS_CONFIG || '/Users/prollo/Projects/private/github/luciana/build/models/');
+        const models = await utils.ModelsParser.parse(process.env.MODELS_CONFIG || '/data/models');
         // Setup the API
         // app = await utils.ApiParser.parse(app, models, process.env.API_CONFIG || '/usr/local/luciana/config/api.json');
         // Setup the middlewares

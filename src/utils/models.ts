@@ -36,7 +36,7 @@ export default class ModelsParser {
                     _.map(modelsFiles, async (currentFilePath: string) => {
                         return new Promise(async (modelResolve, modelReject) => {
                             try {
-                                const model = await import(`${dirpath}${currentFilePath}`);
+                                const model = await import(`${dirpath}/${currentFilePath}`);
                                 const instance = new model.default();
                                 const keys = Object.keys(instance);
                                 const builtSchema: any = {};
