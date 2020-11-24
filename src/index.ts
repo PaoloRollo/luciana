@@ -3,7 +3,6 @@
  * Proudly developed by Paolo Rollo
  * ©2020 MIT License, for you.
  */
-import './db';
 import * as dotenv from 'dotenv';
 import startApp from './app';
 

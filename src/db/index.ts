@@ -1,14 +1,6 @@
-import mongoose from 'mongoose';
+import low from 'lowdb';
+import FileAsync from 'lowdb/adapters/FileAsync';
 
-// Connect to database
-mongoose.connect(
-    process.env.DB_CONNECTION || 'mongo://localhost:27017/luciana',
-    {
-        useNewUrlParser: true,
-        useCreateIndex: true,
-        useUnifiedTopology: true
-    },
-    () => (console.log('Successfully connected to MongoDB.'))
-);
+const db = low(new FileAsync('db.json'));
 
-export default mongoose;
+export { db };

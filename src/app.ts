@@ -7,7 +7,7 @@ import utils from './utils';
 export default async function startApp() {
     try {
         // Create express app
-        const app: Application = express();
+        let app: Application = express();
         app.disable('etag').disable('x-powered-by');
         // CORS Setup
         const corsOptions = {
@@ -24,7 +24,7 @@ export default async function startApp() {
         // Load the models using the parser
         const models = await utils.ModelsParser.parse(process.env.MODELS_CONFIG || '/data/models');
         // Setup the API
-        // app = await utils.ApiParser.parse(app, models, process.env.API_CONFIG || '/usr/local/luciana/config/api.json');
+        app = await utils.ApiParser.parse(app, models, process.env.API_CONFIG || '/usr/local/luciana/config/api.json');
         // Setup the middlewares
         // app = await utils.MiddlewaresParser.parse(app, process.env.MIDDLEWARES_CONFIG || '/usr/local/luciana/config/middlewares.json');
         return app;
